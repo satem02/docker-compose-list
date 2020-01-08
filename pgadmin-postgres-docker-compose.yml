@@ -1,0 +1,41 @@
+version: "3.4"
+
+services:
+    pgAdmin:
+        restart: always
+        image: dpage/pgadmin4
+        container_name: "pgAdmin_host_name"
+        ports:
+            - "8000:80"
+        environment:
+            PGADMIN_DEFAULT_EMAIL: 1234@admin.com
+            PGADMIN_DEFAULT_PASSWORD: 1234
+        volumes:
+            - pgadmin:/var/lib/pgadmin
+
+    postgres:
+        restart: always
+        image: postgres
+        container_name: "postgres_host_name"
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_USER: me
+            POSTGRES_PASSWORD: 1234
+            POSTGRES_DB: learnDb
+        volumes:
+            - pgvol:/var/lib/postgresql/data
+volumes:
+    pgvol:
+    pgadmin: 
+
+#    "DefaultConnection": "Server=localhost;Port=5432;Database=learnDb;User Id=me;Password=1234;",
+#    pgAdmin
+#    email: 1234@admin.com
+#    password: 1234
+
+#    Connect to postgres
+#    host : postgres_host_name
+#    user: me
+#    password: 1234
+#    db: learnDb
